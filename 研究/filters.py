@@ -43,10 +43,8 @@ class filter_stock():
     def gem(self, stock_list):
         return [stock for stock in stock_list if stock[0:3] != '300']
 
-    # TODO:过滤最近两年亏损的股票
-    def aa(self, stock):
-        pass
+    # TODO: 过滤最近两年亏损的股票
 
-    # TODO:过滤被证监会谴责的股票
+    # TODO: 过滤被证监会谴责的股票
 
     #

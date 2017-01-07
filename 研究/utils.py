@@ -34,34 +34,34 @@ def macd(security, fastperiod=12, slowperiod=26, signalperiod=9) :
     macdDIFF, macdDEA, macd = talib.MACDEXT(closes, fastperiod=fastperiod, fastmatype=1, slowperiod=slowperiod, slowmatype=1, signalperiod=signalperiod, signalmatype=1)
     macd = macd * 2
     #log.info("%s macd ==> DIFF=%s, DEA=%s, macd=%s", security, macdDIFF[-1], macdDEA[-1], macd[-1])
-    return macdDIFF, macdDEA, macd 
+    return macdDIFF, macdDEA, macd
 
-# TODO:根据量价关系评分排序，上涨放量下跌缩量，红量多于阴量
+# TODO: 根据量价关系评分排序，上涨放量下跌缩量，红量多于阴量
 
-# TODO:MACD 5\15\30\60分钟及日线底背离
+# TODO: MACD 5\15\30\60分钟及日线底背离
 
-# TODO:MACD 5\15\30\60分钟及日线顶背离
+# TODO: MACD 5\15\30\60分钟及日线顶背离
 
-# 根据当前K线的位置评分，如：当前股票在近1年高低点的位置
+# TODO: 根据当前K线的位置评分，如：当前股票在近1年高低点的位置
 
-# MACD红柱拐点
+# TODO: MACD红柱拐点
 
-# MACD绿柱拐点
+# TODO: MACD绿柱拐点
 
-# 多方炮
+# TODO: 多方炮
 
-# 涨停基因
+# TODO: 涨停基因
 
-# 火焰三烧
+# TODO: 火焰三烧
 
-# 强庄股
+# TODO: 强庄股
 
-# 国家政策扶植
+# TODO: 国家政策扶植
 
-# 亏损超过3%则止损
+# TODO: 亏损超过3%则止损
 
-# 破5日线，破10日线，破20日线止损
+# TODO: 破5日线，破10日线，破20日线止损
 
-# 个股按生命线胜率评分，如：工商银行按20日生命线操作胜率达70%，得70分
+# TODO: 个股按生命线胜率评分，如：工商银行按20日生命线操作胜率达70%，得70分
 
-# 根据个股检测指标的得胜率
+# TODO: 根据个股检测指标的得胜率
