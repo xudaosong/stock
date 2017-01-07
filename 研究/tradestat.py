@@ -1,18 +1,20 @@
-#coding=utf-8
+# coding=utf-8
 
 from kuanke.user_space_api import *
 
+
 class trade_stat():
+
     def __init__(self):
         self.trade_total_count = 0
         self.trade_success_count = 0
         self.statis = {'win': [], 'loss': []}
-        
+
     def reset(self):
         self.trade_total_count = 0
         self.trade_success_count = 0
         self.statis = {'win': [], 'loss': []}
-    
+
     # 记录交易次数便于统计胜率
     # 卖出成功后针对卖出的量进行盈亏统计
     def watch(self, stock, sold_amount, avg_cost, cur_price):
@@ -28,27 +30,29 @@ class trade_stat():
         else:
             loss = [stock, percent]
             self.statis['loss'].append(loss)
-        
+
     def report(self, context):
         cash = context.portfolio.cash
         totol_value = context.portfolio.portfolio_value
-        position = 1 - cash/totol_value
+        position = 1 - cash / totol_value
         log.info("收盘后持仓概况:%s" % str(list(context.portfolio.positions)))
         log.info("仓位概况:%.2f" % position)
-        self.print_win_rate(context.current_dt.strftime("%Y-%m-%d"), context.current_dt.strftime("%Y-%m-%d"), context)
+        self.print_win_rate(context.current_dt.strftime(
+            "%Y-%m-%d"), context.current_dt.strftime("%Y-%m-%d"), context)
 
     # 打印胜率
     def print_win_rate(self, current_date, print_date, context):
         if str(current_date) == str(print_date):
             win_rate = 0
             if 0 < self.trade_total_count and 0 < self.trade_success_count:
-                win_rate = round(self.trade_success_count / float(self.trade_total_count), 3)
+                win_rate = round(self.trade_success_count /
+                                 float(self.trade_total_count), 3)
 
             most_win = self.statis_most_win_percent()
             most_loss = self.statis_most_loss_percent()
             starting_cash = context.portfolio.starting_cash
             total_profit = self.statis_total_profit(context)
-            if len(most_win)==0 or len(most_loss)==0:
+            if len(most_win) == 0 or len(most_loss) == 0:
                 return
 
             print "-"
@@ -88,6 +92,6 @@ class trade_stat():
 
         return result
 
-    # 统计总盈利金额    
+    # 统计总盈利金额
     def statis_total_profit(self, context):
         return context.portfolio.portfolio_value - context.portfolio.starting_cash
