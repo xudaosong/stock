@@ -36,6 +36,23 @@ def macd(security, fastperiod=12, slowperiod=26, signalperiod=9) :
     #log.info("%s macd ==> DIFF=%s, DEA=%s, macd=%s", security, macdDIFF[-1], macdDEA[-1], macd[-1])
     return macdDIFF, macdDEA, macd
 
+# 获取股票的位置,默认为前610交易日
+def stock_position(security, days=610):
+    # 获取股票的520日价格
+    close_data = attribute_history(security, days, '1d', ['low','high'])
+    min = close_data['low'].min()
+    max = close_data['high'].max()
+    current_price = attribute_history(security, 20, '1m', ['close'])['close'][-1]
+    # 从610日最低价到当前价的涨幅
+    recent_gains = (current_price-min)/min*100
+    # 从610日最高价到当前价的跌幅
+    recent_decline = (max-current_price)/max*100
+    log.info("==> %s股票的位置：最低价=%s，最高价=%s，当前价=%s，近期涨幅=%.2f，近期跌幅=%.2f",security,min,max,current_price, recent_gains, recent_decline)
+    return recent_gains, recent_decline
+    # 如果涨幅大于2倍则过滤
+    #if(recent_gains > 2)
+    #    return True
+
 # TODO: 根据量价关系评分排序，上涨放量下跌缩量，红量多于阴量
 
 # TODO: MACD 5\15\30\60分钟及日线底背离

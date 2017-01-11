@@ -18,6 +18,9 @@ def handle_data(context, data):
         # 测试macd
         diff,dea,macd = utils.macd(g.security)
         log.info("%s MACD测试 ==> DIFF=%s, DEA=%s, MACD=%s", g.security, f2(diff[-1]), f2(dea[-1]), f2(macd[-1]))
+        # 获取股票的位置,默认为近两年
+        recent_gains, recent_decline = utils.stock_position(g.security)
+        log.info("==> %s股票的位置：近期涨幅=%.2f，近期跌幅=%.2f", g.security, recent_gains, recent_decline)
 
 def f2(value):
     return round(float(value), 2)
